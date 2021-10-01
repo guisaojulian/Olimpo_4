@@ -1,0 +1,41 @@
+{% extends 'edificios/base.html' %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Registro de Edificios</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Registro de Cuenta</li>
+    </ol>
+</div>
+<form  class= "card card-footer" method="POST">
+    <div class="card-header">
+        <h3 class="card-title">
+            <i class="fas fa-search"></i>    
+        </h3>
+    </div>
+    <div class="card-body">
+        {% csrf_token %}
+        <table style="margin-left: auto;margin-right: auto;">
+            <tr>   
+                <td>{{form|crispy}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-footer">
+        <div class="mt-3">
+            <div class="row mb-3">
+                <div class="col-3 offset-9">
+                    <button type="submit" class="btn btn-success float right">Registrar</button>
+                                                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+                            
+ 
+                                                         
+{% endblock %} 
+

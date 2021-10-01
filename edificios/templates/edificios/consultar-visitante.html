@@ -1,0 +1,57 @@
+{% extends 'edificios/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    <h1>Consultar Ocupantes</h1>
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Consultar de Edificios</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Consultar Visitante</li>
+    </ol>
+</div>  
+<a href="{% url 'registro_visitantes' %}" class="btn btn-primary float right">Registrar</a>
+        {% if forms%}
+            <div class="card-body">
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apartamento</th>
+                        <th>Vehiculo</th>
+                        <th>Placa</th>
+                    </tr>
+                    {% for forms in forms %}
+                    <tr>
+                        <td>{{forms.nombre | title }} </td>
+                        <td>{{forms.apartamento | title }}</td>
+                        <td>{% if forms.vehiculo %}
+                                Moto
+                                {% else %}
+                                Carro
+                                {% endif %}
+
+                        </td>
+                        <td>{{forms.placa | title }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+                
+        {% else %}
+            <div class="alert alert-danger">No hay registro de visitantes</div>
+
+        {%endif%}
+
+        
+    </div>
+
+    
+
+
+
+   
+
+
+{% endblock %} 

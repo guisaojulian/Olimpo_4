@@ -1,0 +1,66 @@
+{% extends 'edificios/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    <h1>Consultar Ocupantes</h1>
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Consultar de propietarios</h1> 
+</div> 
+
+
+<a href="{% url 'registro_personas' %}" class="btn btn-primary float right">Registrar</a>
+        {% if forms%}
+            <div class="table-responsive-xl">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apartamento</th>
+                            <th>Estado</th>
+                            <th>Email</th>
+                            <th>Contacto 1</th>
+                            <th>Contacto 2</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    {% for forms in forms %}
+                    <tbody>
+                        <tr>
+                            <td>{{forms.nombre | title }} </td>
+                            <td>{{forms.apartamento  }}</td>
+                            <td>{% if forms.estado %}
+                                Ocupado
+                            {% else %}
+                                Disponible
+                            {% endif %}
+                            </td>
+                            <td>{{forms.correo }} </td>
+                            <td>{{forms.contacto_1 }} </td>
+                            <td>{{forms.contacto_2 }} </td>
+                            <td>
+                                <a href="{% url 'modificar_ocupante' forms.id %}" class="btn btn-primary btn-sm">Modificar</a>
+                                <a href="{% url 'eliminar_ocupante' forms.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>     
+        {% else %}
+            <div class="alert alert-danger">No hay registro de propietarios</div>
+        {%endif%}
+
+        
+    </div>
+
+    
+
+
+
+   
+
+
+{% endblock %} 

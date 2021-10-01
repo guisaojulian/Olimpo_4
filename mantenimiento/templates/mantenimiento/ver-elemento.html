@@ -1,0 +1,89 @@
+{% extends 'mantenimiento/index.html' %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+<html>
+    <head>
+
+    </head>
+    <body>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="row">
+                <title>
+                    <h1> Ver información de elemento </h1>
+                </title>
+            </div>  
+        </div>
+        <div class="conteiner">
+            <div class="row">
+                <div class="col offset-md-2">
+                    <table class="table table-striped table-bordered">
+                        <thead>Datos de elemento </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th>Marca </th>
+                                    <th>referencia</th>
+                                    <th>Modelo</th>
+                                    <th>Estado</th>
+                                </tr>
+                                <tr>   
+                                    <td>{{ form.elemento }}</td>
+                                    <td>{{ form.marca }}</td>
+                                    <td>{{ form.referencia }}</td>
+                                    <td>{{ form.modelo }}</td>
+                                    <td>{% if form.estado %}
+                                            En servicio
+                                        {% else %}
+                                        Fuera de servicio
+                                        {% endif %} 
+                                    </td>
+                                </tr>
+                            </tbody>
+                        
+                    </table>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 20rem;">
+                        <img src="{{ form.imagen.url }}" width="350" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">{{form}}</h5>
+                        </div>
+                    </div>
+                </div>                          
+            </div>    
+        </div> 
+        <div class="row">
+            <div class="col-md-8 offset-md-3">
+                <table class="table table-responsive">
+                    <thead>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">description</th>
+                        <th scope="col">Observación</th>
+                        <th scope="col">Soporte</th>
+                    </thead>
+                    {%for p in data%}
+                    <tbody>
+                        <td>{{ p.creado }}</td>
+                        <td>{% if p.tipo %}
+                                Correctivo
+                            {% else %}
+                                Preventivo
+                            {% endif %}
+                        </td>
+                        <td>{{ p.descripcion }}</td>
+                        <td>{{ p.observacion }}</td>
+                        <td>{{p.imagen}}</td>
+                    {%endfor%}
+                    </tbody>
+                        <a href="{% url 'preventivo'%}" type="submit" class="btn btn-primary btn-sm" >Registrar</a>
+                </table>
+            </div> 
+        </div>    
+    </body>
+</html>  
+{% endblock %}
+ 

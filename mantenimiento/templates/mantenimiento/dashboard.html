@@ -1,0 +1,130 @@
+{% extends 'mantenimiento/index.html' %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+        
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6 col-md-8 offset-md-3">
+                    <br>
+                    <br>
+                    <br>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-primary text-white mb-4">
+                            <div class="card-body">Cantidad de elementos: {{total_elementos}}</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="{%url 'consultar_elemento' %}">ver</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="container2"></div> 
+                    <div id="container">
+                        <div class="row align-items-center"></div> 
+                    </div>
+                       
+                </div>
+            </div>
+        </div>            
+                    <script type="application/javascript">
+                        Highcharts.chart('container2', {
+                                chart: {
+                                    type: 'bar'
+                                },
+                                title: {
+                                    text: 'Cantidad de elementos por ubicación'
+                                },
+                                subtitle: {
+                                    text: 'Atavanza'
+                                },
+                                xAxis: {
+                                    categories: ['Zona común', 'Torre 1', 'Torre 2', 'Torre 3', 'Torre 4', 'Torre 5', 'Torre 6', 'Torre 7'],
+                                    title: {
+                                        text: null
+                                    }
+                                },
+                                yAxis: {
+                                    min: 0,
+                                    title: {
+                                        text: 'Cantidad de elementos',
+                                        align: 'high'
+                                    },
+                                    labels: {
+                                        overflow: 'justify'
+                                    }
+                                },
+                                tooltip: {
+                                    valueSuffix: '   elementos'
+                                },
+                                plotOptions: {
+                                    bar: {
+                                        dataLabels: {
+                                            enabled: true
+                                        }
+                                    }
+                                },
+                                legend: {
+                                    layout: 'vertical',
+                                    align: 'right',
+                                    verticalAlign: 'top',
+                                    x: -40,
+                                    y: 80,
+                                    floating: true,
+                                    borderWidth: 1,
+                                    backgroundColor:
+                                        Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                                    shadow: true
+                                },
+                                credits: {
+                                    enabled: false
+                                },
+                                series: [{
+                                    name: 'Elementos',
+                                    data: {{ data }}
+                                }]
+                            });
+                    </script>
+                
+                
+                    <script type="application/javascript">
+                
+                                    Highcharts.chart('container', {
+                        chart: {
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false,
+                            type: 'pie'
+                        },
+                        title: {
+                            text: 'Porcentaje por Sistema'
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        },
+                        accessibility: {
+                            point: {
+                                valueSuffix: '%'
+                            }
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                                }
+                            }
+                        },
+                        series: [{
+                            name: 'Cantidad',
+                            colorByPoint: true,
+                            data: {{ data3 }}
+                                
+                            
+                        }]
+                    });
+
+                    </script>
+{% endblock %}
+        
+

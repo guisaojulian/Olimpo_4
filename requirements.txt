@@ -1,0 +1,5 @@
+django == 3.2.6
+pillow
+django-crispy-forms
+django-admin-interface
+whitenouse
