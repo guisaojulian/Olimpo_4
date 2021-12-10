@@ -1,4 +1,4 @@
-from edificios.views import index
+
 from django.contrib.auth import views
 from django.urls import path
 from django.conf import settings
@@ -8,6 +8,7 @@ from django.conf.urls.static import static
 
 from .views import*
 from . import views
+from .views import Vista_Ot
 
 urlpatterns = [
 
@@ -21,7 +22,9 @@ urlpatterns = [
     path('ver-elemento/<id>', views.ver_elemento, name= 'ver_elemento'),
     path('preventivo-elemento/', views.preventivo, name='preventivo'),
     path('correctivo-elemento/', views.correctivo, name='correctivo'),
-    path('dasnboard/', views.dashboard, name='dashboard'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('ot/crear/',  Vista_Ot.crear_ot, name='crear_ot'),
+    path('ot/mostrar/',  Vista_Ot.mostrar_ot, name='mostrar_ot'),
 ]
 
 if settings.DEBUG:

@@ -8,6 +8,9 @@ from django.views.generic import View
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 
+from mantenimiento.forms import OtForms
+from mantenimiento.models import OtModel
+
 
 
 # self 
@@ -15,6 +18,11 @@ from .models import*
 from .forms import*
 
 # Create your views here.
+
+
+
+
+
 
 class Vista_Registro(View):
 
@@ -34,7 +42,7 @@ class Vista_Registro(View):
             messages.success(request, 'Registro exitoso')
             login(request, usuario)
 
-            return redirect('index')
+            return redirect('dashboard')
 
         else:
             for msg in form.error_messages:
@@ -300,3 +308,5 @@ def eliminar_rubro(request, id):
     rubro.delete()
     messages.success(request, 'Cambio Exito')
     return redirect('consultar_presupuesto')
+
+

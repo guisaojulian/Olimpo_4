@@ -1,4 +1,5 @@
 
+from django.views.generic import View
 import edificios
 from edificios.models import Edificio_Model
 from os import name
@@ -37,8 +38,12 @@ def dashboard(request):
         data=[]
         data2=[]
         data3=[]
+        data4=[]
         total_elementos = ElementoModel.objects.count()
+        total_preventivo = PreventivoModel.objects.filter(tipo=0).count()
+        data4.append(int(total_preventivo))
         data2.append(int(total_elementos))
+
         for m in range(0, 8):
             filtro_elementos = ElementoModel.objects.filter(ubicacion=m).count()
             data.append(int(filtro_elementos))
@@ -46,16 +51,18 @@ def dashboard(request):
             filtro_sistema = ElementoModel.objects.filter(id_sistema=m).count()
             data3.append(int(filtro_sistema))
         
+        
     except:
         pass
     context = {
         'data':data,
         'total_elementos': data2,
-        'total_sistema' : data3
+        'total_sistema' : data3,
+        'total_preventivo':data4
     }
     return render(request, 'mantenimiento/dashboard.html', context)
 
-
+@permission_required('mantenimiento.add_sistema_models')
 def ingresar_sistema(request):
 
     formulario = SistemaForms
@@ -73,7 +80,7 @@ def ingresar_sistema(request):
 
     return render(request, 'mantenimiento/ingresar-sistema.html', context)
 
-
+@permission_required('mantenimiento.add_elemento_models')
 def ingresar_elemento(request):
 
     formulario = ElementosForms
@@ -92,7 +99,7 @@ def ingresar_elemento(request):
 
     return render(request, 'mantenimiento/ingresar-elemento.html', context)
 
-
+@permission_required('mantenimiento.view_elemento_models')
 def consultar_elemento(request):
     elementos = ElementoModel.objects.all()
     pagina = request.GET.get('page', 1)
@@ -178,3 +185,27 @@ def correctivo(request):
     return render(request, 'mantenimiento/correctivo-elemento.html', context)
 
 
+class Vista_Ot(View):
+    @permission_required('mantenimiento.add_ot_models')
+    def crear_ot(request):
+        formulario =OtForms()
+        context ={
+            'form':formulario
+        }
+        if request.method == 'POST':
+            formulario = OtForms(data=request.POST)
+            if formulario.is_valid():
+                formulario.save()
+                messages.success(request,'Registro exitoso')
+                return redirect('crea_ot')
+            else:
+                context['form']=formulario
+        return render(request, 'mantenimiento/ot/crear.html', context)
+
+    def mostrar_ot(request):
+        data = OtModel.objects.all()
+        context ={
+            'entity':data
+        }
+
+        return render(request, 'mantenimiento/ot/mostrar.html', context)

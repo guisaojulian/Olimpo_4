@@ -30,8 +30,12 @@
                                 <td>{{ p.elemento | title }}</td>
                                 <td>
                                     <a href="{% url 'ver_elemento' p.id %}" class="btn btn-primary btn-sm">Ver</a>
+                                    {%if perms.mantenimiento.change_elemento_model%}
                                     <a href="{% url 'modificar_elemento' p.id%}" class="btn btn-primary btn-sm">Modificar</a>
+                                    {%endif%}
+                                    {%if perms.mantenimiento.delete_elemento_model%}
                                     <a href="{% url 'eliminar_elemento' p.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                    {%endif%}
                                 </td>
                             </tr>
                         {% endfor %}

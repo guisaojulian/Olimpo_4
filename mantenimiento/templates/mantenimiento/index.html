@@ -52,81 +52,91 @@
                 </li>
             </ul>
         </nav>
+
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="{% url 'dashboard' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Tablero de control
-                            </a>
-                            
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Consutar
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'consultar_elemento' %}">Elementos</a>
-                                    <a class="nav-link" href="{% url 'consultar_visitante' %}">Visitantes</a>
-                                    <a class="nav-link" href="{% url 'consultar_presupuesto' %}">Presupuesto</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Mantenimiento
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Registrar Información
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <!-- # Tablero de control -->
+                            <div class="sb-sidenav-menu-heading">Tablero</div>
+                                <a class="nav-link" href="{% url 'dashboard' %}">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                    Tablero de control
+                                </a>
+                                <!-- # espacion de mantenimiento-->
+                                {%if perms.mantenimiento.view_elemento%}
+                                <div class="sb-sidenav-menu-heading">Mantenimiento</div>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseLayouts">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                            Consultar
+                                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                    <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="{% url 'registro_edificios' %}">Edificios</a>
-                                            <a class="nav-link" href="{% url 'ingresar_sistema' %}">Sistemas</a>
-                                            <a class="nav-link" href="{% url 'ingresar_elemento' %}">Elementos</a>
-                                           
+                                            <a class="nav-link" href="{% url 'consultar_elemento' %}">Elementos</a>
                                         </nav>
                                     </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Registrar Presupuesto
+                                    
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseLayouts">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                            Registrar
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                    {%endif%}
+                                    <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="{% url 'presupuesto_cuenta' %}">Cuenta</a>
-                                            <a class="nav-link" href="{% url 'presupuesto_rubro' %}">Rubro</a>
-                                            
+                                            <a class="nav-link" href="{% url 'ingresar_sistema' %}">Sistemas</a>
+                                            <a class="nav-link" href="{% url 'ingresar_elemento' %}">Elementos</a>
+                                        </nav>
+                                    </div>   
+                                
+                                <!-- # Edificio -->
+                                <div class="sb-sidenav-menu-heading">Edificio</div>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseLayouts">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                            Consultar
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{% url 'consultar_ocupantes' %}">Ocupantes</a>
+                                            <a class="nav-link" href="{% url 'consultar_visitante' %}">Visitantes</a>
+                                        </nav>
+                                    </div>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseLayouts">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                            Registrar
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="collapseFour" aria-labelledby="headingFour" data-bs-parent="#sidenavAccordion">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{% url 'registro_personas' %}">Ocupantes</a>
+                                            <a class="nav-link" href="{% url 'registro_visitantes' %}">Visitantes</a>
                                         </nav>
                                     </div> 
-                                </nav>
-                            </div>
-                            
-                            <div class="sb-sidenav-menu-heading">Adicionales</div>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Ordenes de compra
-                            </a>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Listado de OT
-                            </a>
+                                
+                                {%if perms.mantenimiento_add_ot_model%}
+                                <div class="sb-sidenav-menu-heading">Adicionales</div>
+                                    <a class="nav-link" href="{%url 'crear_ot'%}">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                            Ordenes de compra
+                                    </a>
+                                    <a class="nav-link" href="{% url 'mostrar_ot'%}">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                            Listado de OT
+                                    </a>
+                                </div>
+                                {%endif%}
+                                <div class="sb-sidenav-footer">
+                                    <div class="small">Todos los derechos reservados Efest 2021</div>
+                                </div> 
                         </div>
-                    </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Igresaste como: {{user.username }}</div>
-                        Efest
-                    </div>
+                    </div> 
                 </nav>
             </div>
-        </div> 
+        </div>
+    </body>
         {% block contenido %}
        
        

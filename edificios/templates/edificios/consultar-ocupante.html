@@ -1,17 +1,19 @@
-{% extends 'edificios/base.html' %}
+{% extends 'mantenimiento/index.html' %}
 {% load crispy_forms_tags %}
 {% block title %}
-    <h1>Consultar Ocupantes</h1>
 {% endblock %}
 
 {% block contenido %}
 
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Consultar de propietarios</h1> 
+    <div class="col-md-6 offset-7">
+        <h1 class="mt-4">Consultar de propietarios</h1>
+    </div>   
 </div> 
-
-
-<a href="{% url 'registro_personas' %}" class="btn btn-primary float right">Registrar</a>
+<div class="card-body">
+    <div class="col-md-9 offset-2">
+        <a href="{% url 'registro_personas' %}" class="btn btn-primary float right">Registrar</a>
+        <br>
         {% if forms%}
             <div class="table-responsive-xl">
                 <table class="table table-hover table-bordered">
@@ -41,8 +43,12 @@
                             <td>{{forms.contacto_1 }} </td>
                             <td>{{forms.contacto_2 }} </td>
                             <td>
+                                {%if perms.edificios.change_propietario_model%}
                                 <a href="{% url 'modificar_ocupante' forms.id %}" class="btn btn-primary btn-sm">Modificar</a>
+                                {%endif%}
+                                {%if perms.edificios.delete_propietario_model%}
                                 <a href="{% url 'eliminar_ocupante' forms.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                {%endif%}
                             </td>
                         </tr>
                     {% endfor %}
@@ -52,9 +58,11 @@
         {% else %}
             <div class="alert alert-danger">No hay registro de propietarios</div>
         {%endif%}
-
-        
     </div>
+</div>
+
+
+
 
     
 

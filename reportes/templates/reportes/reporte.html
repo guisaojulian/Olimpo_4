@@ -1,0 +1,23 @@
+{% extends 'mantenimiento/index.html' %}
+{% load crispy_forms_tags %}
+{%load static%}
+
+{% block head_list %}
+<script type="text/javascript" src="{% static 'lib\daterangepicker-master/jquery/latest/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib\daterangepicker-master/momentjs/latest/moment.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'lib\daterangepicker-master/npm/daterangepicker/daterangepicker.min.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'lib\daterangepicker-master/npm/daterangepicker/daterangepicker.css' %}" />
+{%endblock%}
+
+{% block contenido %}
+{{title}}
+<div class="col-md-3">
+    <div class="form-group">
+        <label>Rango de fechas:</label>
+        {{form.rango_fecha}}
+
+    </div>
+</div>
+      
+{% endblock %}
+ 

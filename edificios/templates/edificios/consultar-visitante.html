@@ -1,29 +1,36 @@
-{% extends 'edificios/base.html' %}
+{% extends 'mantenimiento/index.html' %}
 {% load crispy_forms_tags %}
 {% block title %}
     <h1>Consultar Ocupantes</h1>
 {% endblock %}
 
 {% block contenido %}
-
-<div class="container-fluid px-4">
-    <h1 class="mt-4">Consultar de Edificios</h1>
+<br>
+<br>
+<br>
+<div class="container col-md-5 offset-md-7">
+    <h1 class="row">Consultar de Edificios</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Consultar Visitante</li>
     </ol>
-</div>  
-<a href="{% url 'registro_visitantes' %}" class="btn btn-primary float right">Registrar</a>
+</div>
+<div class="container col-md-9 offset-md-2">
+    <a href="{% url 'registro_visitantes' %}" class="btn btn-primary float right">Registrar</a>
+    <br>
         {% if forms%}
             <div class="card-body">
                 <table class="table table-striped table-hover">
                     <tr>
+                        <th>Fecha</th>
                         <th>Nombre</th>
                         <th>Apartamento</th>
                         <th>Vehiculo</th>
                         <th>Placa</th>
+
                     </tr>
                     {% for forms in forms %}
                     <tr>
+                        <td>{{forms.creado}}</td>
                         <td>{{forms.nombre | title }} </td>
                         <td>{{forms.apartamento | title }}</td>
                         <td>{% if forms.vehiculo %}
@@ -31,7 +38,6 @@
                                 {% else %}
                                 Carro
                                 {% endif %}
-
                         </td>
                         <td>{{forms.placa | title }}</td>
                     </tr>
@@ -41,17 +47,9 @@
                 
         {% else %}
             <div class="alert alert-danger">No hay registro de visitantes</div>
-
-        {%endif%}
-
-        
+        {%endif%}      
     </div>
 
-    
 
-
-
-   
-
-
+</div>
 {% endblock %} 

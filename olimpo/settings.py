@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'edificios',
     'crispy_forms',
     'mantenimiento',
+    'reportes',
     
 ]
 
@@ -84,18 +85,18 @@ WSGI_APPLICATION = 'olimpo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'Olimpo',
         'USER': 'postgres',
-        'HOST': 'efest-2411.postgres.pythonanywhere-services.com',
         'PASSWORD': '@Jul14n@',
-        'PORT': '12411',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

@@ -23,3 +23,8 @@ class CorrectivoForms(forms.ModelForm):
     class Meta:
         model = CorrectivoModel
         fields = '__all__'
+
+class OtForms(forms.ModelForm):
+    class Meta:
+        model = OtModel
+        fields = '__all__'
